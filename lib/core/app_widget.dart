@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../splash/splash.dart';
+import '../home/home.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "DevQuiz",
-        home: SplashPage());
+        debugShowCheckedModeBanner: false, title: "DevQuiz", home: HomePage());
   }
 }
