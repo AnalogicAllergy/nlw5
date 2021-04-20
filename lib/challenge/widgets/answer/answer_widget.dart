@@ -15,6 +15,24 @@ class AnswerWidget extends StatelessWidget {
 
   bool get isCorrect => isSelected && isRight;
 
+  //colors getters
+  Color get _selectedColorRight =>
+      isRight ? AppColors.darkGreen : AppColors.darkRed;
+
+  Color get _selectedBorderRight =>
+      isRight ? AppColors.lightGreen : AppColors.lightRed;
+
+  Color get _selectedColorCardRight =>
+      isRight ? AppColors.lightGreen : AppColors.lightRed;
+
+  Color get _selectedBorderCardRight =>
+      isRight ? AppColors.green : AppColors.red;
+
+  TextStyle get _selectedTextStyleRight =>
+      isRight ? AppTextStyles.bodyDarkGreen : AppTextStyles.bodyDarkRed;
+
+  IconData get _selectedIconRight => isRight ? Icons.check : Icons.close;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,15 +60,21 @@ class AnswerWidget extends StatelessWidget {
             width: 24,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: isCorrect ? AppColors.darkGreen : Colors.black,
+              border:
+                  Border.fromBorderSide(BorderSide(color: AppColors.border)),
+              color: isCorrect ? AppColors.darkGreen : AppColors.white,
             ),
             child: isSelected
                 ? isCorrect
                     ? Icon(
                         Icons.check,
                         color: AppColors.white,
+                        size: 16,
                       )
-                    : Icon(Icons.close)
+                    : Icon(
+                        Icons.close,
+                        size: 16,
+                      )
                 : null,
           ),
         ],
