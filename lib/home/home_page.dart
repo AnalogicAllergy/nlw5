@@ -15,27 +15,52 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBarWidget(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                LevelButtonWidget(
-                  label: "Fácil",
-                ),
-                LevelButtonWidget(
-                  label: "Médio",
-                ),
-                LevelButtonWidget(
-                  label: "Difícil",
-                ),
-                LevelButtonWidget(
-                  label: "Perito",
-                ),
-              ],
+            SizedBox(
+              height: 24,
             ),
-            QuizCardWidget(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  LevelButtonWidget(
+                    label: "Fácil",
+                  ),
+                  LevelButtonWidget(
+                    label: "Médio",
+                  ),
+                  LevelButtonWidget(
+                    label: "Difícil",
+                  ),
+                  LevelButtonWidget(
+                    label: "Perito",
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                scrollDirection: Axis.vertical,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                shrinkWrap: true,
+                children: [
+                  QuizCardWidget(),
+                  QuizCardWidget(),
+                  QuizCardWidget(),
+                  QuizCardWidget(),
+                  QuizCardWidget(),
+                  QuizCardWidget(),
+                ],
+              ),
+            )
           ],
         ),
       ),
