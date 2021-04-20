@@ -13,8 +13,6 @@ class AnswerWidget extends StatelessWidget {
       required this.isRight})
       : super(key: key);
 
-  bool get isCorrect => isSelected && isRight;
-
   //colors getters
   Color get _selectedColorRight =>
       isRight ? AppColors.darkGreen : AppColors.darkRed;
@@ -35,49 +33,48 @@ class AnswerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isCorrect ? AppColors.lightGreen : AppColors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.fromBorderSide(
-          BorderSide(color: AppColors.border),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Text(title,
-                style: isCorrect
-                    ? AppTextStyles.body.copyWith(
-                        color: AppColors.darkGreen,
-                      )
-                    : AppTextStyles.body),
-          ),
-          Container(
-            height: 24,
-            width: 24,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border:
-                  Border.fromBorderSide(BorderSide(color: AppColors.border)),
-              color: isCorrect ? AppColors.darkGreen : AppColors.white,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? _selectedColorCardRight : AppColors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.fromBorderSide(
+            BorderSide(
+              color: isSelected ? _selectedBorderCardRight : AppColors.border,
             ),
-            child: isSelected
-                ? isCorrect
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(title,
+                  style: isSelected
+                      ? _selectedTextStyleRight
+                      : AppTextStyles.body),
+            ),
+            Container(
+                height: 24,
+                width: 24,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.fromBorderSide(BorderSide(
+                      color: isSelected
+                          ? _selectedBorderRight
+                          : AppColors.border)),
+                  color: isSelected ? _selectedColorRight : AppColors.white,
+                ),
+                child: isSelected
                     ? Icon(
-                        Icons.check,
+                        _selectedIconRight,
                         color: AppColors.white,
                         size: 16,
                       )
-                    : Icon(
-                        Icons.close,
-                        size: 16,
-                      )
-                : null,
-          ),
-        ],
+                    : null),
+          ],
+        ),
       ),
     );
   }

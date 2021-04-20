@@ -1,4 +1,3 @@
-import 'package:devquiz/challenge/widgets/quiz/quiz_widget.dart';
 import 'package:devquiz/core/core.dart';
 import 'package:devquiz/shared/widgets/progress_indicator/shared.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,6 @@ class QuestionIndicatorWidget extends StatelessWidget {
             height: 16,
           ),
           ProgressIndicatorWidget(value: 0.3),
-          QuizWidget(title: "O que o Flutter faz em sua totalidade?")
         ],
       ),
     );

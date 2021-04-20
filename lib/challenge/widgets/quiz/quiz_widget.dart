@@ -11,6 +11,7 @@ class QuizWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(16),
       child: Column(
         children: [
           Text(
@@ -26,6 +27,15 @@ class QuizWidget extends StatelessWidget {
               isSelected: true),
           AnswerWidget(
               title: "Kit de desenvolvimento de interface de usuário",
+              isRight: true,
+              isSelected: false),
+          AnswerWidget(
+              title: "Kit de desenvolvimento de interface de usuário",
+              isRight: false,
+              isSelected: true),
+          AnswerWidget(
+              title:
+                  "Kit de desenvolvimento de interface de usuário para aokasdfa asdasd ads dads ",
               isRight: false,
               isSelected: false)
         ],
