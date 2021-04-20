@@ -1,6 +1,7 @@
 import 'package:devquiz/core/core.dart';
-import 'package:devquiz/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets.dart';
 
 class ScoreCard extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _ScoreCardState extends State<ScoreCard> {
           decoration: BoxDecoration(
               color: AppColors.white, borderRadius: BorderRadius.circular(15)),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
