@@ -1,10 +1,19 @@
-import 'package:devquiz/shared/models/models.dart';
+import 'dart:convert';
 
-class HomeRepository{
-  Future<UserModel> getUser() async{
+import 'package:devquiz/shared/models/models.dart';
+import 'package:flutter/services.dart';
+
+class HomeRepository {
+  Future<UserModel> getUser() async {
     final response = await rootBundle.loadString('/database/user.json');
-    final user = UserMode.fromMap(response);
+    final user = UserModel.fromMap(json.decode(response));
     return user;
   }
-  Future<List<QuizModel>> getQuizzes() async{}
+
+  Future<List<QuizModel>> getQuizzes() async {
+    final response = await rootBundle.loadString('/database/quizzes.json');
+    final list = jsonDecode(response) as List;
+    final quizzes = list.map((e) => QuizModel.fromMap(e)).toList();
+    return quizzes;
+  }
 }

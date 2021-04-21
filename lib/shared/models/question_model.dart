@@ -6,4 +6,19 @@ class QuestionModel {
 
   QuestionModel({required this.title, required this.answers})
       : assert(answers.length == 4);
+
+  factory QuestionModel.fromMap(Map<String, dynamic> map) {
+    return new QuestionModel(
+      title: map['title'] as String,
+      answers: map['answers'] as List<AnswerModel>,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    // ignore: unnecessary_cast
+    return {
+      'title': this.title,
+      'answers': this.answers,
+    } as Map<String, dynamic>;
+  }
 }
