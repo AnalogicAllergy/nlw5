@@ -1,8 +1,8 @@
+import 'package:devquiz/home/home_controller.dart';
 import 'package:devquiz/home/widgets/level_button/level_button_widget.dart';
+import 'package:devquiz/home/widgets/quiz_card/quiz_card_widget.dart';
 import 'package:devquiz/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
-import 'widgets/quiz_card/quiz_card_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,10 +10,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = HomeController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.getQuizes();
+    controller.getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(user: controller.user),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -46,20 +56,22 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 2,
-                scrollDirection: Axis.vertical,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-                shrinkWrap: true,
-                children: [
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                ],
-              ),
+                  crossAxisCount: 2,
+                  scrollDirection: Axis.vertical,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  shrinkWrap: true,
+                  children: controller.quizzes!
+                      .map((quiz) => QuizCardWidget(
+                            percent:
+                                (quiz.questionsAnswered / quiz.questions.length)
+                                    .toDouble(),
+                            imageUrl: quiz.image,
+                            title: quiz.title,
+                            completed:
+                                "${quiz.questionsAnswered}/${quiz.questions.length}",
+                          ))
+                      .toList()),
             )
           ],
         ),
