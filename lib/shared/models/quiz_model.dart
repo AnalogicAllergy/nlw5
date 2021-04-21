@@ -10,7 +10,7 @@ class QuizModel {
   final Level level;
 
   QuizModel(
-      {required this.questionsAnswered = 0,
+      {this.questionsAnswered = 0,
       required this.image,
       required this.level,
       required this.title,
