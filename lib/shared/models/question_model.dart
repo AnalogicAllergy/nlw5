@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'models.dart';
 
 class QuestionModel {
@@ -7,18 +9,23 @@ class QuestionModel {
   QuestionModel({required this.title, required this.answers})
       : assert(answers.length == 4);
 
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'answers': answers.map((x) => x.toMap()).toList(),
+    };
+  }
+
   factory QuestionModel.fromMap(Map<String, dynamic> map) {
-    return new QuestionModel(
-      title: map['title'] as String,
-      answers: map['answers'] as List<AnswerModel>,
+    return QuestionModel(
+      title: map['title'],
+      answers: List<AnswerModel>.from(
+          map['answers']?.map((x) => AnswerModel.fromMap(x))),
     );
   }
 
-  Map<String, dynamic> toMap() {
-    // ignore: unnecessary_cast
-    return {
-      'title': this.title,
-      'answers': this.answers,
-    } as Map<String, dynamic>;
-  }
+  String toJson() => json.encode(toMap());
+
+  factory QuestionModel.fromJson(String source) =>
+      QuestionModel.fromMap(json.decode(source));
 }

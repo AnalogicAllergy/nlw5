@@ -1,7 +1,8 @@
-{
+[{
   "title": "NLW 5 Flutter",
   "image": "blocks",
   "level": "facil",
+  "questionsAnswered": 2,
   "questions": [
     {
       "title": "Está gostando do Flutter?",
@@ -25,4 +26,4 @@
       ]
     }
   ]
-}
+}]
