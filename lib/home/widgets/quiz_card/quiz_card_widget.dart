@@ -17,6 +17,7 @@ class QuizCardWidget extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final assetUrl = AppImages.getAssetUrl(imageUrl);
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -30,7 +31,7 @@ class QuizCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            child: Image.asset(imageUrl),
+            child: Image.asset(assetUrl!),
             height: 40,
             width: 40,
           ),

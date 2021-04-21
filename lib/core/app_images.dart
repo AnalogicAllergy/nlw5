@@ -7,4 +7,27 @@ class AppImages {
   static String get error => "assets/images/error.png";
   static String get trophy => "assets/images/trophy.png";
   static String get logo => "assets/images/logo.png";
+
+  static String? getAssetUrl(String key) {
+    switch (key) {
+      case "data":
+        return AppImages.data;
+      case "hierarchy":
+        return AppImages.hierarchy;
+      case "laptop":
+        return AppImages.laptop;
+      case "blocks":
+        return AppImages.blocks;
+      case "check":
+        return AppImages.check;
+      case "error":
+        return AppImages.error;
+      case "trophy":
+        return AppImages.trophy;
+      case "logo":
+        return AppImages.logo;
+      default:
+        return null;
+    }
+  }
 }

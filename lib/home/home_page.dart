@@ -19,7 +19,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     controller.getQuizzes();
     controller.getUser();
-    setState(() {});
+    controller.stateNotifier.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
