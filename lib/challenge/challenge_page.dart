@@ -30,6 +30,11 @@ class _ChallengePageState extends State<ChallengePage> {
     super.initState();
   }
 
+  void changePage() {
+    pageController.nextPage(
+        duration: Duration(milliseconds: 300), curve: Curves.bounceIn);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +57,12 @@ class _ChallengePageState extends State<ChallengePage> {
           preferredSize: Size.fromHeight(86)),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
-        children: widget.questions.map((e) => QuizWidget(question: e)).toList(),
+        children: widget.questions
+            .map((e) => QuizWidget(
+                  question: e,
+                  onChange: changePage,
+                ))
+            .toList(),
         controller: pageController,
       ),
       bottomNavigationBar: SafeArea(
@@ -66,9 +76,7 @@ class _ChallengePageState extends State<ChallengePage> {
                   child: NextButtonWidget.white(
                 label: "Pular",
                 onTap: () {
-                  pageController.nextPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.bounceIn);
+                  changePage();
                 },
               )),
               SizedBox(width: 7),
