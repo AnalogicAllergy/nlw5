@@ -32,7 +32,7 @@ class _ChallengePageState extends State<ChallengePage> {
 
   void changePage() {
     pageController.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.bounceIn);
+        duration: Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   @override
@@ -68,26 +68,29 @@ class _ChallengePageState extends State<ChallengePage> {
       bottomNavigationBar: SafeArea(
         bottom: true,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                  child: NextButtonWidget.white(
-                label: "Pular",
-                onTap: () {
-                  changePage();
-                },
-              )),
-              SizedBox(width: 7),
-              // Expanded(
-              //     child: NextButtonWidget.green(
-              //   label: "Próxima",
-              //   onTap: () {},
-              // ))
-            ],
-          ),
-        ),
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: ValueListenableBuilder(
+                valueListenable: controller.currentPageNotifier,
+                builder: (context, value, _) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                          child: NextButtonWidget.white(
+                        label: "Pular",
+                        onTap: () {
+                          changePage();
+                        },
+                      )),
+                      SizedBox(width: 7),
+                      Expanded(
+                          child: NextButtonWidget.green(
+                        label: "Próxima",
+                        onTap: () {},
+                      ))
+                    ],
+                  );
+                })),
       ),
     );
   }
