@@ -83,11 +83,12 @@ class _ChallengePageState extends State<ChallengePage> {
                         },
                       )),
                       SizedBox(width: 7),
-                      Expanded(
-                          child: NextButtonWidget.green(
-                        label: "Próxima",
-                        onTap: () {},
-                      ))
+                      if (value == widget.questions.length)
+                        Expanded(
+                            child: NextButtonWidget.green(
+                          label: "Próxima",
+                          onTap: () {},
+                        ))
                     ],
                   );
                 })),
