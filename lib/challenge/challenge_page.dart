@@ -25,7 +25,7 @@ class _ChallengePageState extends State<ChallengePage> {
       setState(() {});
     });
     pageController.addListener(() {
-      controller.currentPage = pageController.page!.toInt();
+      controller.currentPage = pageController.page!.toInt() + 1;
     });
     super.initState();
   }
@@ -40,14 +40,18 @@ class _ChallengePageState extends State<ChallengePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BackButton(),
-                  QuestionIndicatorWidget(
-                    currentPage: controller.currentPage,
-                    length: widget.questions.length,
+                  ValueListenableBuilder<int>(
+                    valueListenable: controller.currentPageNotifier,
+                    builder: (context, value, _) => QuestionIndicatorWidget(
+                      currentPage: value,
+                      length: widget.questions.length,
+                    ),
                   ),
                 ],
               )),
           preferredSize: Size.fromHeight(86)),
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         children: widget.questions.map((e) => QuizWidget(question: e)).toList(),
         controller: pageController,
       ),
@@ -60,8 +64,12 @@ class _ChallengePageState extends State<ChallengePage> {
             children: [
               Expanded(
                   child: NextButtonWidget.white(
-                label: "Voltar",
-                onTap: () {},
+                label: "Pular",
+                onTap: () {
+                  pageController.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.bounceIn);
+                },
               )),
               SizedBox(width: 7),
               Expanded(

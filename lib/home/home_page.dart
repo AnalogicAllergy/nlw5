@@ -70,8 +70,7 @@ class _HomePageState extends State<HomePage> {
                   children: controller.quizzes!
                       .map((quiz) => QuizCardWidget(
                             percent:
-                                (quiz.questionsAnswered / quiz.questions.length)
-                                    .toDouble(),
+                                quiz.questionsAnswered / quiz.questions.length,
                             imageUrl: quiz.image,
                             title: quiz.title,
                             completed:
