@@ -1,12 +1,13 @@
 import 'package:devquiz/core/core.dart';
+import 'package:devquiz/shared/models/models.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets.dart';
 
 class QuizWidget extends StatelessWidget {
-  final String title;
+  final QuestionModel question;
 
-  const QuizWidget({Key? key, required this.title}) : super(key: key);
+  const QuizWidget({Key? key, required this.question}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,30 +15,21 @@ class QuizWidget extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: Column(
         children: [
+          SizedBox(height: 64),
           Text(
-            title,
+            question.title,
             style: AppTextStyles.heading,
           ),
           SizedBox(
             height: 24,
           ),
-          AnswerWidget(
-              title: "Kit de desenvolvimento de interface de usuário",
-              isRight: true,
-              isSelected: true),
-          AnswerWidget(
-              title: "Kit de desenvolvimento de interface de usuário",
-              isRight: true,
-              isSelected: false),
-          AnswerWidget(
-              title: "Kit de desenvolvimento de interface de usuário",
-              isRight: false,
-              isSelected: true),
-          AnswerWidget(
-              title:
-                  "Kit de desenvolvimento de interface de usuário para aokasdfa asdasd ads dads ",
-              isRight: false,
-              isSelected: false)
+          ...question.answers
+              .map((e) => AnswerWidget(
+                    title: e.title,
+                    isRight: e.isRight,
+                    isSelected: false,
+                  ))
+              .toList()
         ],
       ),
     );

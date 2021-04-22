@@ -1,3 +1,4 @@
+import 'package:devquiz/challenge/challenge_page.dart';
 import 'package:devquiz/home/home_controller.dart';
 import 'package:devquiz/home/home_state.dart';
 import 'package:devquiz/home/widgets/level_button/level_button_widget.dart';
@@ -61,22 +62,32 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: GridView.count(
-                    crossAxisCount: 2,
-                    scrollDirection: Axis.vertical,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                    shrinkWrap: true,
-                    children: controller.quizzes!
-                        .map((quiz) => QuizCardWidget(
-                              percent: (quiz.questionsAnswered /
-                                      quiz.questions.length)
-                                  .toDouble(),
-                              imageUrl: quiz.image,
-                              title: quiz.title,
-                              completed:
-                                  "${quiz.questionsAnswered}/${quiz.questions.length}",
-                            ))
-                        .toList()),
+                  crossAxisCount: 2,
+                  scrollDirection: Axis.vertical,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  shrinkWrap: true,
+                  children: controller.quizzes!
+                      .map((quiz) => QuizCardWidget(
+                            percent:
+                                (quiz.questionsAnswered / quiz.questions.length)
+                                    .toDouble(),
+                            imageUrl: quiz.image,
+                            title: quiz.title,
+                            completed:
+                                "${quiz.questionsAnswered}/${quiz.questions.length}",
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ChallengePage(
+                                    questions: quiz.questions,
+                                  ),
+                                ),
+                              );
+                            },
+                          ))
+                      .toList(),
+                ),
               )
             ],
           ),
@@ -84,7 +95,9 @@ class _HomePageState extends State<HomePage> {
       );
     } else {
       return Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     }
   }
