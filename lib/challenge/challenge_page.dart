@@ -1,5 +1,6 @@
 import 'package:devquiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:devquiz/challenge/widgets/widgets.dart';
+import 'package:devquiz/result/result_page.dart';
 import 'package:devquiz/shared/models/models.dart';
 import 'package:flutter/material.dart';
 
@@ -31,8 +32,9 @@ class _ChallengePageState extends State<ChallengePage> {
   }
 
   void changePage() {
-    pageController.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.linear);
+    if (controller.currentPage < widget.questions.length)
+      pageController.nextPage(
+          duration: Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   @override
@@ -69,25 +71,31 @@ class _ChallengePageState extends State<ChallengePage> {
         bottom: true,
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: ValueListenableBuilder(
+            child: ValueListenableBuilder<int>(
                 valueListenable: controller.currentPageNotifier,
                 builder: (context, value, _) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(
-                          child: NextButtonWidget.white(
-                        label: "Pular",
-                        onTap: () {
-                          changePage();
-                        },
-                      )),
+                      if (value < widget.questions.length)
+                        Expanded(
+                            child: NextButtonWidget.white(
+                          label: "Pular",
+                          onTap: () {
+                            changePage();
+                          },
+                        )),
                       SizedBox(width: 7),
                       if (value == widget.questions.length)
                         Expanded(
                             child: NextButtonWidget.green(
                           label: "Próxima",
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ResultPage()));
+                          },
                         ))
                     ],
                   );
