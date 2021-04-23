@@ -2,10 +2,17 @@ import 'package:devquiz/core/core.dart';
 import 'package:devquiz/result/components/back_button.dart';
 import 'package:devquiz/result/components/share_button.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ResultPage extends StatelessWidget {
+  final String title;
+  final int length;
+  final int rightQuestions;
   const ResultPage({
     Key? key,
+    required this.title,
+    required this.length,
+    required this.rightQuestions,
   }) : super(key: key);
 
   @override
@@ -31,14 +38,19 @@ class ResultPage extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.w400, fontSize: 16),
                 children: [
                   TextSpan(
-                      text: "Gerenciamento de Estado\n",
+                      text: "$title\n",
                       style: AppTextStyles.body
                           .copyWith(fontWeight: FontWeight.w600, fontSize: 16)),
-                  TextSpan(text: " com 6 de 10 acertos")
+                  TextSpan(text: " com $rightQuestions de $length acertos")
                 ]),
           ),
           SizedBox(height: 80),
-          ShareButton.purple(label: "Compartilhar", onTap: () {}),
+          ShareButton.purple(
+              label: "Compartilhar",
+              onTap: () {
+                Share.share("Olhe a minha pontuação no DevQuiz!",
+                    subject: "DevQuiz");
+              }),
           SizedBox(height: 20),
           BackButtonWidget(
               onTap: () {

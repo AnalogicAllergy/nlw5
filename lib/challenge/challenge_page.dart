@@ -39,6 +39,11 @@ class _ChallengePageState extends State<ChallengePage> {
           duration: Duration(milliseconds: 300), curve: Curves.linear);
   }
 
+  void onSelected(bool value) {
+    if (value) controller.answerRights++;
+    changePage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +69,7 @@ class _ChallengePageState extends State<ChallengePage> {
         children: widget.questions
             .map((e) => QuizWidget(
                   question: e,
-                  onChange: changePage,
+                  onSelected: onSelected,
                 ))
             .toList(),
         controller: pageController,
@@ -96,7 +101,12 @@ class _ChallengePageState extends State<ChallengePage> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ResultPage()));
+                                    builder: (context) => ResultPage(
+                                          title: widget.title,
+                                          length: widget.questions.length,
+                                          rightQuestions:
+                                              controller.answerRights,
+                                        )));
                           },
                         ))
                     ],
