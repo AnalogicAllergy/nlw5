@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import '../widgets.dart';
 
 class ScoreCard extends StatefulWidget {
+  final double percent;
+
+  const ScoreCard({Key? key, required this.percent}) : super(key: key);
   @override
   _ScoreCardState createState() => _ScoreCardState();
 }
@@ -22,7 +25,11 @@ class _ScoreCardState extends State<ScoreCard> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(flex: 1, child: ChartWidget()),
+                Expanded(
+                    flex: 1,
+                    child: ChartWidget(
+                      percent: widget.percent,
+                    )),
                 Expanded(
                   flex: 3,
                   child: Padding(
