@@ -9,7 +9,9 @@ import 'widgets/next_button/next_button_widget.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<QuestionModel> questions;
-  const ChallengePage({Key? key, required this.questions}) : super(key: key);
+  final String title;
+  const ChallengePage({Key? key, required this.questions, required this.title})
+      : super(key: key);
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
